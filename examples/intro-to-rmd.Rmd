@@ -1,0 +1,139 @@
+---
+title: "Example R Markdown Document"
+output: html_document
+---
+
+This is an R Markdown document. An _extremely_ powerful type of R file. This lets us combine prose and code. So that we can better document our analyses. R Markdown can be used for creating word or pdf documents, resumes, websites, books, and so much more! 
+
+## What is Markdown?
+
+Markdown is a syntax that lets us style our documents. Think of markdown as a simpler version of microsoft word with so many fewer clicks. 
+
+Here’s an overview of Markdown syntax that you can use anywhere on GitHub.com or in your own text files.
+
+### Headers
+
+```
+# This is an h1 tag
+## This is an h2 tag
+###### This is an h6 tag
+```
+
+# This is an h1 tag
+## This is an h2 tag
+###### This is an h6 tag
+
+### Emphasis
+
+```
+*This text will be italic*
+_This will also be italic_
+
+**This text will be bold**
+__This will also be bold__
+
+_You **can** combine them_
+```
+
+*This text will be italic*
+_This will also be italic_
+
+**This text will be bold**
+__This will also be bold__
+
+_You **can** combine them_
+
+### Lists
+
+#### Unordered
+
+```
+* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b
+```
+
+* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b
+
+#### Ordered
+
+```
+1. Item 1
+1. Item 2
+1. Item 3
+   1. Item 3a
+   1. Item 3b
+```
+
+1. Item 1
+1. Item 2
+1. Item 3
+   1. Item 3a
+   1. Item 3b
+
+### Images
+
+
+```
+![alt text](/image-path-or-url)
+```
+
+![Your face looking at R for the first time](https://media.giphy.com/media/OaPdszhQoDdCg/giphy.gif)
+
+### Blockquotes
+
+As Kanye West said:
+
+```
+> We're living the future so
+> the present is our past.
+```
+
+> We're living the future so
+> the present is our past.
+
+
+## R Markdown and code chunks
+
+The powerhouse of R Markdown (Rmd) are **code chunks**. Code chunks start with ` ```{r} ` on its own line and end with ` ``` ` on it's own line as well.
+
+Create code chunks with the shortcut `cntrl` + `opt` + `i`.
+
+Code chunks have lots of options. You can explore them with the little gear at the far right of the code chunk. We can choose to only show the output of the code and not the code itself by setting the chunk argument `echo = FALSE`.
+
+```{r echo = FALSE}
+"hello class!"
+```
+
+This is super helpful if you want to create a plot but not show anyone the code. 
+
+```{r, echo = FALSE}
+library(ggplot2)
+library(uitk)
+
+ggplot(acs_housing, aes(bach, med_house_income)) + 
+  geom_point() +
+  theme_minimal()
+```
+
+To change the type of document that you will create press the drop down next to the blue ball of yarn which says `Knit`. This will change the `output` to something like `pdf_document`. 
+
+The top section delineated with `---` is called the header. This is used to store metadata for the document such as the `title`, `author` (that's you!), and the output type. 
+
+With R Markdown we can use cool packages like `kableExtra`, `reactable`, and `gt` to create pretty tables to look at! 
+
+```{r, message = FALSE}
+library(dplyr)
+
+airbnb_hosts %>% 
+  group_by(since_year) %>% 
+  summarise(n_superhosts = sum(superhost, na.rm = TRUE), 
+            n_listings = sum(n_listings, na.rm = TRUE)) %>% 
+  arrange(-since_year) %>% 
+  gt::gt()
+```
+

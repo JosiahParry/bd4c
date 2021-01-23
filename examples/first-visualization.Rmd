@@ -1,0 +1,82 @@
+---
+title: "Exploratory analysis with ggplot2"
+output: html_document
+---
+
+Load libraries 
+
+```{r setup, include=FALSE}
+library(uitk)
+library(tidyverse)
+```
+
+Preview data
+
+```{r}
+acs_edu
+```
+
+## Building a ggplot
+
+```{r bare-plot}
+ggplot(acs_edu)
+```
+ 
+Add a mapped aesthetic
+
+```{r set-x-aes}
+ggplot(acs_edu, aes(x = med_house_income))
+```
+
+Add geometry to our plot to actually see something
+
+```{r}
+ggplot(acs_edu, aes(x = med_house_income)) + 
+  geom_histogram()
+```
+
+Visualize a different variable
+
+```{r}
+ggplot(acs_edu, aes(x = bach)) + 
+  geom_histogram()
+```
+
+Create a scatter plot
+
+```{r}
+ggplot(acs_edu, aes(x = bach, y = med_house_income)) +
+  geom_point()
+```
+
+Add a smoothed layer to it 
+
+```{r scatter-smooth}
+ggplot(acs_edu, aes(x = bach, y = med_house_income)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+Create a fancy labeled plot 
+
+```{r}
+ggplot(acs_edu, aes(x = bach, y = med_house_income)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x = "% of population with a Bachelor's Degree",
+       y = "Median Household Income",
+       title = "Relationship between Education and Income")
+```
+
+
+Color our points by another variable
+
+```{r}
+ggplot(acs_edu, aes(x = bach, y = med_house_income, color = white)) +
+  geom_point(alpha = .4) +
+  geom_smooth(method = "lm") + 
+  labs(x = "% of population with a Bachelor's Degree",
+       y = "Median Household Income",
+       title = "Relationship between Education and Income",
+       subtitle = "Colored by whiteness") 
+```
