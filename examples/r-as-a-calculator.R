@@ -64,13 +64,12 @@ sum(10)
 
 
 # We can provide more **arguments** to `sum()`.
+# To find the sum of 10, 3, and 2 we write `sum(10, 3, 2)`.
+`sum(10, 3, 2)
 
-# To find the sum of 10, 3, and 2 we write `sum(c(10, 3, 2))`.
-# c() **combines** values together.
-
-sum(c(10, 3, 2))
 
 # We can create a sequence of numbers using `c()`. This is called a **vector**.
+# c() **combines** values together.
 odds <- c(1, 3, 5)
 
 # We can make math expressions with vectors too :)
